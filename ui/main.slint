@@ -2,6 +2,7 @@ import { CoverImage } from "./CoverImage.slint";
 import { PlayButtons } from "PlayButtons.slint";
 import { TimelineSlider } from "Slider.slint";
 import {Track} from "./state.slint";
+import { TimeText } from "TimeText.slint";
 export {Track}
 export component MainWindow inherits Window {
     max-width: 7000px;
@@ -12,11 +13,13 @@ export component MainWindow inherits Window {
     private property <length> h: self.height;
     padding: 20px;
     title: "";
-    GridLayout {
+    VerticalLayout {
         
         spacing: 30px;
-        Rectangle {}
-        Row {
+        alignment: center;
+        VerticalLayout {
+            spacing: 15px;
+        HorizontalLayout {
             Rectangle {
                 horizontal-stretch: 1;
         }
@@ -26,7 +29,6 @@ export component MainWindow inherits Window {
                 coverImageSrc: Track.coverImage;
                 paused: Track.paused;
                 size: 200px;
-                colspan: 2;
                 // horizontal-stretch: 1;
                 // vertical-stretch: 0;
                 horizontal-stretch: 0;
@@ -39,13 +41,20 @@ export component MainWindow inherits Window {
                 horizontal-stretch: 1;
             }
         }
-        Row {
-            Rectangle {
-                horizontal-stretch: 1;
+        HorizontalLayout {
+            alignment: space-around;
+            Text {
+                font-size: 18px;
+                font-weight: 600;
+                text: Track.trackTitle;
             }
-            Rectangle {}
+        }}
+        VerticalLayout {
+            spacing: 20px;
+        HorizontalLayout {
+            alignment: space-around;
             PlayButtons {
-                size: 70px;
+                size: 50px;
                 
                 // padding-left: 40px;
                 // padding-right: 40px;
@@ -53,30 +62,35 @@ export component MainWindow inherits Window {
                 // horizontal-stretch: 1;
                 // padding-left: (w - self.width)/2; 
             }
-            Rectangle {}
-            Rectangle {
-                horizontal-stretch: 1;
-            }
+            
         }
-        Row {
-            Rectangle {
-                horizontal-stretch: 1;
-            }
-            Text {
-                text: "0:00";
-            }
+        HorizontalLayout {
+            alignment: space-around;
+            
+            HorizontalLayout {
+                spacing: 10px;
+                VerticalLayout {
+                    alignment: center;
+                    TimeText {
+                        time: Track.trackCurrentTime;
+                        font-size: 15px;
+                        font-weight: 600;
+                    }
+                }
+            VerticalLayout {
+                alignment: center;
             TimelineSlider {
-                
-                lengthTime: 2*60+35;
+                min-width: 250px;
+            }}
+            VerticalLayout {
+                alignment: center;
+            TimeText {
+                font-size: 15px;
+                font-weight: 600;
+                time: Track.trackDuration;
+            }}
             }
-            Text {
-                text: "1:00";
-            }
-            Rectangle {
-                horizontal-stretch: 1;
-            }
-        }
-        Rectangle {}
+        }}
     }
     
 }

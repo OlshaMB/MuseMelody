@@ -1,21 +1,34 @@
-import { ForwardSkip , BackwardSkip, Play, ForwardSkip30, BackwardSkip30} from "icons.slint";
+import { ForwardSkip , BackwardSkip, Play as Played, ForwardSkip30, BackwardSkip30} from "icons.slint";
 import { Pause } from "CoverImage.slint";
 import {Track} from "./state.slint";
-
+component Play {
+    in property <bool> paused <=> Track.paused;
+    in property <length> size;
+    width: size * 0.5;
+    height: size * 0.5;
+    if (paused) : Played {
+        size: size;
+        color: gray;
+        fill: #383838;
+    }
+    if (!paused) : Rectangle {
+        width: size*0.5;
+        height: size*0.5;
+        background: #383838;
+        border-radius: 3px;
+    }
+}
 export component PlayButtons {
     in property <length> size;
     HorizontalLayout {
-        BackwardSkip30 { 
-            size: size;
-        }
-        // BackwardSkip {
+        // BackwardSkip30 { 
         //     size: size;
-        //     color: gray;
         // }
+        alignment: center;
         Rectangle {
-            width: play.width;
-            height: play.height;
-            play := Play {
+            width: size;
+            height: size;
+            BackwardSkip {
                 size: size;
                 color: gray;
             }
@@ -25,13 +38,29 @@ export component PlayButtons {
                 }
             }
         }
-        // ForwardSkip { 
-        //     size: size;
-        //     color: gray;
-        // }
-        ForwardSkip30 { 
-            size: size;
+        Rectangle {
+            width: size;
+            height: size;
+            play := Play {
+                size: size;
+            }
+            TouchArea {
+                clicked => {
+                    Track.pause();
+                }
+            }
         }
+        Rectangle {
+            width: size;
+            height: size;
+            ForwardSkip { 
+                size: size;
+                color: gray;
+            }
+        }
+        // ForwardSkip30 { 
+        //     size: size;
+        // }
     }
 }
 export component PlayButtonsPreview {

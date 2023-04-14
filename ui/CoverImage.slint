@@ -24,8 +24,8 @@ export component CoverImage inherits Rectangle {
     height: size;
     border-radius: 10px;
     clip: true;
-    background: @linear-gradient(70deg, #3A1C71 7%, #F3A183);
-
+    // background: @linear-gradient(70deg, #3A1C71 7%, #F3A183);
+    // background: #383838;
     TouchArea {
         clicked => {
             Track.pause()
@@ -37,9 +37,15 @@ export component CoverImage inherits Rectangle {
         width: size;
         height: size;
     }
-    
-    if (paused) : Pause {
-       size: size;
-       color: #ffffffe3;
+    if (!coverImage) : Image {
+        source: @image-url("../resources/testCoverImage.png");
+        width: size;
+        height: size;
     }
+    
+    // if (paused) : Pause {
+    //    size: size;
+    //    color: #ffffffe3;
+    // }
+
 }

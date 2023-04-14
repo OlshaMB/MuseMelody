@@ -2,31 +2,46 @@ use audiotags::Tag;
 use rodio::{Decoder, OutputStream, Sink, Source};
 use soloud::*;
 use std::{
+    env,
     fs::File,
     io::{BufReader, Cursor},
     ops::Deref,
     rc::Rc,
     sync::{mpsc::channel, Arc, Mutex},
     thread,
-    time::Duration, env,
+    time::Duration,
 };
 
 fn main() {
     let app = MainWindow::new().unwrap();
     let mut sl = Arc::new(Mutex::new(Soloud::default().unwrap()));
     let album_cover: slint::Image;
-    let tag = Tag::new().read_from_path(env::current_dir().unwrap().join("resources/Alan Walker - Dreamer [NCS Release].mp3")).unwrap();
+    let path = env::current_dir()
+        .unwrap()
+        .join("resources/Alan Walker - Dreamer.flac");
+    let tag = Tag::new().read_from_path(path.clone()).unwrap();
     app.global::<Track>().set_hasCoverImage(false);
+    app.global::<Track>().set_paused(true);
+    app.global::<Track>()
+        .set_trackTitle(path.as_path().file_stem().unwrap().to_str().unwrap().into());
     if tag.album_cover().is_some() {
-        println!("Has cover");
-        let image = image::io::Reader::new(Cursor::new(tag.album_cover().unwrap().data)).with_guessed_format().unwrap().decode().unwrap().into_rgb8();
-        let pixel_buffer = slint::SharedPixelBuffer::<slint::Rgb8Pixel>::clone_from_slice(image.as_raw(), image.width(), image.height());
+        let image = image::io::Reader::new(Cursor::new(tag.album_cover().unwrap().data))
+            .with_guessed_format()
+            .unwrap()
+            .decode()
+            .unwrap()
+            .into_rgb8();
+        let pixel_buffer = slint::SharedPixelBuffer::<slint::Rgb8Pixel>::clone_from_slice(
+            image.as_raw(),
+            image.width(),
+            image.height(),
+        );
         album_cover = slint::Image::from_rgb8(pixel_buffer);
         app.global::<Track>().set_hasCoverImage(true);
         app.global::<Track>().set_coverImage(album_cover);
     }
     let mut wav = audio::Wav::default();
-    wav.load(env::current_dir().unwrap().join("resources/Alan Walker - Dreamer [NCS Release].mp3")).unwrap();
+    wav.load(path).unwrap();
     let mut handle: Arc<Mutex<Option<Handle>>> = Arc::new(Mutex::new(None));
     app.global::<Track>().set_trackDuration(wav.length() as i32);
     app.global::<Track>().on_pause({

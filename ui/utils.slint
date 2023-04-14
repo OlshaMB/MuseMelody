@@ -1,0 +1,14 @@
+export global Utils {
+    public function stringifyI(n: int) -> string {
+        return n;
+    }
+    public function stringifyF(n: float) -> string {
+        return n;
+    }
+    public pure function padTime(n: int) -> string {
+        if (n<10) {
+            return "0"+n;
+        }
+        return n;
+    }
+}

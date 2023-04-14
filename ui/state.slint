@@ -1,10 +1,12 @@
 export global Track {
     in-out property <int> trackDuration;
     in-out property <int> trackCurrentTime;
+    in-out property <string> trackTitle;
     in-out property <bool> paused;
     in-out property <bool> hasCoverImage;
     in-out property <image> coverImage;
     // callback trackDurationChange();
     callback scroll();
     callback pause();
+    
 }

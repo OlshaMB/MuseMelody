@@ -1,0 +1,8 @@
+import {Utils} from "utils.slint";
+export component TimeText inherits Text {
+    in-out property <int> time;
+    in-out property<int> hours: Math.floor(time/3600);
+    in-out property<int> minutes: Math.floor((time - self.hours*3600)/60);
+    in-out property<int> seconds: time - self.hours*3600 - self.minutes*60;
+    text: "\{self.hours>1 ? self.hours + ":" : ""}\{self.minutes}:\{Utils.padTime(self.seconds)}";
+}
