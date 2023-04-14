@@ -1,0 +1,43 @@
+import { ForwardSkip , BackwardSkip, Play, ForwardSkip30, BackwardSkip30} from "icons.slint";
+import { Pause } from "CoverImage.slint";
+import {Track} from "./state.slint";
+
+export component PlayButtons {
+    in property <length> size;
+    HorizontalLayout {
+        BackwardSkip30 { 
+            size: size;
+        }
+        // BackwardSkip {
+        //     size: size;
+        //     color: gray;
+        // }
+        Rectangle {
+            width: play.width;
+            height: play.height;
+            play := Play {
+                size: size;
+                color: gray;
+            }
+            TouchArea {
+                clicked => {
+                    Track.pause();
+                }
+            }
+        }
+        // ForwardSkip { 
+        //     size: size;
+        //     color: gray;
+        // }
+        ForwardSkip30 { 
+            size: size;
+        }
+    }
+}
+export component PlayButtonsPreview {
+    VerticalLayout {
+        PlayButtons {
+            size: 50px;
+        }
+    }
+}

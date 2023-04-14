@@ -1,0 +1,60 @@
+export component ForwardSkip inherits Path {
+    in property <length> size: 200px;
+    in property <color> color;
+    width: size;
+    height: size*0.5803108808;
+    commands: "M99.5 56V0M51 8.00597V48.7092C51 51.7884 54.3333 53.7129 57 52.1733L92.25 31.8217C94.9167 30.2821 94.9167 26.4331 92.25 24.8935L57 4.54187C54.3333 3.00226 51 4.92677 51 8.00597ZM3 8.00597V48.7092C3 51.7884 6.33334 53.7129 9 52.1733L44.25 31.8217C46.9167 30.2821 46.9167 26.4331 44.25 24.8935L9 4.54187C6.33333 3.00226 3 4.92677 3 8.00597Z";
+    stroke: #BEBEBE;
+    stroke-width:size*0.0390625;
+    // padding: 20px;
+}
+export component BackwardSkip inherits Path {
+    in property <length> size: 200px;
+    in property <color> color;
+    width: size;
+    height: size*0.5803108808;
+    commands: "M3.00014 0.0000915527L3.00014 56.0001M51.5001 47.9941V7.29093C51.5001 4.21172 48.1668 2.28723 45.5001 3.82683L10.2501 24.1784C7.58347 25.718 7.58347 29.567 10.2501 31.1066L45.5001 51.4582C48.1668 52.9978 51.5001 51.0733 51.5001 47.9941ZM99.5001 47.9941V7.29093C99.5001 4.21172 96.1668 2.28723 93.5001 3.82683L58.2501 24.1784C55.5834 25.718 55.5835 29.567 58.2501 31.1066L93.5001 51.4582C96.1668 52.9978 99.5001 51.0733 99.5001 47.9941Z";
+    stroke: #BEBEBE;
+    stroke-width:size*0.0390625;
+    // padding: 20px;
+}
+export component ForwardSkip30{
+    in property <length> size: 70px;
+    width: size*0.8;
+Path {
+    commands: "M103.632 25L104.23 33.04L97 29.4735M102.745 31C93.8135 14.3347 76.2305 3 56 3C26.7289 3 3 26.7289 3 56C3 85.2711 26.7289 109 56 109C61.2097 109 66.2439 108.248 71 106.848C74.4973 105.817 77.8442 104.436 81 102.745";
+    stroke: #BEBEBE;
+    stroke-width:size*0.0390625;
+}
+
+Text {
+    text: "30";
+    font-size: size*0.3;
+    color: #BEBEBE;
+}
+}
+export component BackwardSkip30{
+    in property <length> size: 200px;
+    width: size*0.8;
+Path {
+    commands: "M3.59819 25L3 33.04L10.2305 29.4735M4.48543 31C13.4169 14.3347 30.9999 3 51.2303 3C80.5012 3 104.23 26.7289 104.23 56C104.23 85.2711 80.5012 109 51.2303 109C46.0205 109 40.9864 108.248 36.2303 106.848C32.7331 105.817 29.3861 104.436 26.2304 102.745";
+    stroke: #BEBEBE;
+    stroke-width:size*0.0390625;
+}
+
+Text {
+    text: "30";
+    font-size: size*0.3;
+    color: #BEBEBE;
+}
+}
+export component Play inherits Path {
+    in property <length> size: 200px;
+    in property <color> color;
+    width: size;
+    height: size*0.5803108808;
+    commands: "M86 57.0359C88.6667 58.5755 88.6667 62.4245 86 63.9641L50.75 84.3157C48.0833 85.8553 44.75 83.9308 44.75 80.8516V40.1484C44.75 37.0692 48.0833 35.1447 50.75 36.6843L86 57.0359Z";
+    stroke: #BEBEBE;
+    stroke-width:size*0.0390625;
+    // padding: 20px;
+}

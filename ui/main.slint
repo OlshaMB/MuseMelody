@@ -1,0 +1,82 @@
+import { CoverImage } from "./CoverImage.slint";
+import { PlayButtons } from "PlayButtons.slint";
+import { TimelineSlider } from "Slider.slint";
+import {Track} from "./state.slint";
+export {Track}
+export component MainWindow inherits Window {
+    max-width: 7000px;
+    max-height: 7000px;
+    preferred-width: 817px;
+    preferred-height: 1106px;
+    private property <length> w: self.width;
+    private property <length> h: self.height;
+    padding: 20px;
+    title: "";
+    GridLayout {
+        
+        spacing: 30px;
+        Rectangle {}
+        Row {
+            Rectangle {
+                horizontal-stretch: 1;
+        }
+            Rectangle {}
+            CoverImage {
+                coverImage: Track.hasCoverImage;
+                coverImageSrc: Track.coverImage;
+                paused: Track.paused;
+                size: 200px;
+                colspan: 2;
+                // horizontal-stretch: 1;
+                // vertical-stretch: 0;
+                horizontal-stretch: 0;
+                // padding-left: 40px;
+                // padding-right: 40px;
+                // padding-left: (w - self.width)/2;
+            }
+            Rectangle {}
+            Rectangle {
+                horizontal-stretch: 1;
+            }
+        }
+        Row {
+            Rectangle {
+                horizontal-stretch: 1;
+            }
+            Rectangle {}
+            PlayButtons {
+                size: 70px;
+                
+                // padding-left: 40px;
+                // padding-right: 40px;
+                // vertical-stretch: 0;
+                // horizontal-stretch: 1;
+                // padding-left: (w - self.width)/2; 
+            }
+            Rectangle {}
+            Rectangle {
+                horizontal-stretch: 1;
+            }
+        }
+        Row {
+            Rectangle {
+                horizontal-stretch: 1;
+            }
+            Text {
+                text: "0:00";
+            }
+            TimelineSlider {
+                
+                lengthTime: 2*60+35;
+            }
+            Text {
+                text: "1:00";
+            }
+            Rectangle {
+                horizontal-stretch: 1;
+            }
+        }
+        Rectangle {}
+    }
+    
+}

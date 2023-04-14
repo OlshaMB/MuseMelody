@@ -1,0 +1,49 @@
+import {Track} from "./state.slint";
+export component TimelineSlider inherits Rectangle {
+    in-out property <int> lengthTime;
+    in-out property <int> currentTime <=> Track.trackCurrentTime;
+    private property <length> w: self.width;
+    init => {
+        currentTime=-1
+    }
+    // width: 300px;
+    height: 5px;
+    background: #cacaca;
+    padding: 3px;
+    vertical-stretch: 0;
+    Rectangle {
+        background: #eeeeee;
+        width: 20px;
+        height: 20px;
+        border-radius: 9999px;
+        x: currentTime!=-1 ? root.width/lengthTime*currentTime - self.width/2 : root.x;
+        interactionZone := TouchArea {
+            //future current time
+            private property <int> furrentTime;
+            moved => {
+                furrentTime = (currentTime*1px + interactionZone.mouse-x)/1px;
+                if (furrentTime>lengthTime ) {
+                    currentTime=lengthTime;
+                    Track.scroll();
+                    return;
+                };
+                if (furrentTime<0) {
+                    currentTime=0;
+                    Track.scroll();
+                    return;
+                }
+                currentTime = furrentTime;
+                Track.scroll();
+            }
+        }
+    }
+    
+}
+component TimelineSliderPreview inherits Window {
+    Rectangle {
+    TimelineSlider {
+        padding: 20px;
+        lengthTime: 4000;
+    }
+    }
+}

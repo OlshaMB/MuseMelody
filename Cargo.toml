@@ -1,0 +1,16 @@
+[package]
+name = "MuseMelody"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+audiotags = "0.4.1"
+image = "0.24.6"
+rodio = "0.17.1"
+slint = "1.0.0"
+soloud = "1.0.2"
+[build-dependencies]
+slint-build = "1.0.0"
+glob = "0.3.1"

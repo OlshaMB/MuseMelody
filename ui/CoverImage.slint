@@ -1,0 +1,45 @@
+import {Track} from "./state.slint";
+export component Pause {
+    in property <length> size;
+    in property <color> color;
+    width: size*0.890625;
+    height: size*0.890625;
+    Path{
+        commands:"M86 57.0359C88.6667 58.5755 88.6667 62.4245 86 63.9641L50.75 84.3157C48.0833 85.8553 44.75 83.9308 44.75 80.8516V40.1484C44.75 37.0692 48.0833 35.1447 50.75 36.6843L86 57.0359Z";
+        stroke: color;
+        stroke-width: size*0.0390625;
+        width: parent.width*0.3793859649;
+        height: parent.height*0.4273684211;
+        x: (parent.width - self.width)/2+size*0.0390625;
+    }
+}
+
+export component CoverImage inherits Rectangle {
+    in property <bool> coverImage: false;
+    in property <image> coverImageSrc;
+    in property <bool> paused;
+    in property <length> size;
+
+    width: size;
+    height: size;
+    border-radius: 10px;
+    clip: true;
+    background: @linear-gradient(70deg, #3A1C71 7%, #F3A183);
+
+    TouchArea {
+        clicked => {
+            Track.pause()
+        }
+    }
+
+    if (coverImage) : Image{
+        source: coverImageSrc;
+        width: size;
+        height: size;
+    }
+    
+    if (paused) : Pause {
+       size: size;
+       color: #ffffffe3;
+    }
+}
